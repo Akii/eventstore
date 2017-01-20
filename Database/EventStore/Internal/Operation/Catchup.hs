@@ -55,7 +55,7 @@ streamNotFound stream =
 data CatchupState
     = RegularCatchup Text Int32
       -- ^ Indicates the stream name and the next event number to start from.
-    | AllCatchup Int64 Int64
+    | AllCatchup Int64 Int64 deriving Show
       -- ^ Indicates the commit and prepare position. Used when catching up from
       --   the $all stream.
 

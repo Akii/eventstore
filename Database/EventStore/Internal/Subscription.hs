@@ -279,8 +279,8 @@ tryRetryCatcupSubscription pushCmd env mvarState lcycle params = do
             let (num, posM) = lastEventNumSM sm
                 newStart =
                   case catchupState params of
-                      RegularCatchup stream _ ->
-                          RegularCatchup stream num
+                      RegularCatchup stream num2 ->
+                          RegularCatchup stream num2
                       AllCatchup{} ->
                           case posM of
                               Just (Position npc npp) ->
@@ -290,6 +290,9 @@ tryRetryCatcupSubscription pushCmd env mvarState lcycle params = do
                 newParams = params { catchupState = newStart }
 
                 newOp = createCatchupOperation env newParams
+
+            print num
+            print newStart
 
             subPushOp env (catchupOpEventHandler mvarState)
                 newOp
